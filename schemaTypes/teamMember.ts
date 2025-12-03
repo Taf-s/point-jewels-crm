@@ -1,16 +1,31 @@
 import { defineField, defineType } from 'sanity'
 
+/**
+ * TEAM MEMBER SCHEMA
+ * 
+ * Represents a person with access to the CMS.
+ * Controls role-based access and permissions.
+ * 
+ * Roles:
+ *   - Owner/Master: Full system control (that's Liza!)
+ *   - Product Manager: Can add/edit products
+ *   - Viewer: Read-only access for previews
+ */
 export default defineType({
   name: 'teamMember',
   title: 'Team Member',
   type: 'document',
   fields: [
+    // Person's full name
     defineField({
       name: 'name',
       title: 'Full Name',
       type: 'string',
       validation: (rule) => rule.required(),
+      description: 'The person\'s full name',
     }),
+
+    // Email address (used for access)
     defineField({
       name: 'email',
       title: 'Email Address',
@@ -22,7 +37,10 @@ export default defineType({
           }
           return true
         }),
+      description: 'Email address for this team member',
     }),
+
+    // Access level/permissions
     defineField({
       name: 'role',
       title: 'Role',
@@ -36,8 +54,10 @@ export default defineType({
         layout: 'radio',
       },
       validation: (rule) => rule.required(),
-      description: 'Owner can do everything. Product Manager can add/edit products. Viewer can only see.',
+      description: 'Owner: Full control | Product Manager: Add/edit products | Viewer: Read-only',
     }),
+
+    // Active status toggle
     defineField({
       name: 'isActive',
       title: 'Active',
@@ -46,6 +66,8 @@ export default defineType({
       description: 'Deactivate to revoke access without deleting the record',
     }),
   ],
+
+  // Customizes how team members appear in the list view
   preview: {
     select: {
       title: 'name',
