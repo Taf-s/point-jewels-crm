@@ -9,6 +9,7 @@ All notable changes to Point Jewels CRM are documented in this file.
 ### Added
 
 #### Schema Architecture
+
 - **Product Document Type**
   - Core jewelry product catalog with categories (necklace, ring, bracelet, pendant, watch)
   - Multi-image gallery support with grid layout
@@ -42,6 +43,7 @@ All notable changes to Point Jewels CRM are documented in this file.
   - Preserves member records without deletion
 
 ### Documentation
+
 - **LIZA_USER_GUIDE.md**: Beginner-friendly user guide with:
   - Step-by-step instructions for adding products
   - Variant management guide
@@ -66,6 +68,7 @@ All notable changes to Point Jewels CRM are documented in this file.
   - Tech stack details
 
 ### Code Quality
+
 - Comprehensive JSDoc comments on all schema files
 - Clear field descriptions in every schema type
 - Detailed comments explaining design decisions
@@ -73,6 +76,7 @@ All notable changes to Point Jewels CRM are documented in this file.
 - Standardized code formatting and organization
 
 ### Development Setup
+
 - Sanity Studio configured and running
 - TypeScript strict mode enabled
 - ESLint and Prettier configured
@@ -83,20 +87,25 @@ All notable changes to Point Jewels CRM are documented in this file.
 ## Development Notes
 
 ### Phase 1 Status: ✅ COMPLETE
+
 Core admin functionality is complete and tested. Liza can manage:
+
 - Products with variants
 - Collections and organization
 - Team access control
 - Inventory tracking
 
 ### Phase 2 Status: 🚧 PLANNED
+
 Next iteration will focus on customer-facing experience:
+
 - Product browsing interface
 - Fuzzy search and filtering (by category, material, price)
 - Collection display
 - Customer inquiry/order integration
 
 ### Design Decisions
+
 1. **Variants as Nested Objects**: Keeps the same product design with multiple material options organized together
 2. **Optional Collections**: Allows flexibility without forcing organization on every product
 3. **SKU at Variant Level**: Each material option gets its own inventory code
@@ -118,6 +127,7 @@ Next iteration will focus on customer-facing experience:
 ## Future Roadmap
 
 ### Phase 2: Customer Experience
+
 - [ ] Product catalog frontend
 - [ ] Category-based filtering
 - [ ] Material and price range filters
@@ -125,12 +135,14 @@ Next iteration will focus on customer-facing experience:
 - [ ] Collection browsing
 
 ### Phase 3: Business Intelligence
+
 - [ ] Inventory alerts (low stock)
 - [ ] Sales analytics dashboard
 - [ ] Best-seller tracking
 - [ ] Product performance reports
 
 ### Phase 4: Advanced Features
+
 - [ ] Order management system
 - [ ] Customer inquiry forms
 - [ ] Email notifications
@@ -140,6 +152,7 @@ Next iteration will focus on customer-facing experience:
 ---
 
 ## Tech Stack
+
 - **CMS**: Sanity 3.95.0
 - **Frontend Framework**: React 19
 - **Language**: TypeScript 5
@@ -149,6 +162,7 @@ Next iteration will focus on customer-facing experience:
 ---
 
 ## Contributors
+
 - Tafara Sithole (Lead Developer)
 - Liza (Client/Business Owner)
 - Jarred (Designer)
