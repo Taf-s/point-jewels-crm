@@ -22,6 +22,22 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Necklace', value: 'necklace' },
+          { title: 'Ring', value: 'ring' },
+          { title: 'Bracelet', value: 'bracelet' },
+          { title: 'Pendant', value: 'pendant' },
+          { title: 'Watch', value: 'watch' },
+        ],
+        layout: 'dropdown',
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'images',
       title: 'Gallery',
       type: 'array',
@@ -29,25 +45,7 @@ export default defineType({
       options: {
         layout: 'grid',
       },
-    }),
-    defineField({
-      name: 'price',
-      title: 'Price (ZAR)',
-      type: 'number',
-    }),
-    defineField({
-      name: 'material',
-      title: 'Metal Type',
-      type: 'string',
-      options: {
-        list: [
-          { title: '18k Gold', value: '18k_gold' },
-          { title: 'Rose Gold', value: 'rose_gold' },
-          { title: 'Platinum', value: 'platinum' },
-          { title: 'Sterling Silver', value: 'silver' },
-        ],
-        layout: 'radio',
-      },
+      validation: (rule) => rule.required().min(1),
     }),
     defineField({
       name: 'description',
@@ -55,5 +53,36 @@ export default defineType({
       type: 'text',
       rows: 3,
     }),
+    defineField({
+      name: 'collection',
+      title: 'Collection',
+      type: 'reference',
+      to: [{ type: 'collection' }],
+      description: 'Optional: Add this piece to a collection',
+    }),
+    defineField({
+      name: 'variants',
+      title: 'Materials & Pricing',
+      type: 'array',
+      of: [
+        {
+          type: 'variant',
+        },
+      ],
+      validation: (rule) => rule.required().min(1),
+    }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      category: 'category',
+    },
+    prepare(selection) {
+      const { title, category } = selection
+      return {
+        title: title,
+        subtitle: `Category: ${category}`,
+      }
+    },
+  },
 })
