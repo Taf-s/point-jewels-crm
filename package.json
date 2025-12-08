@@ -1,0 +1,48 @@
+{
+  "name": "point-jewels-crm",
+  "version": "1.0.0",
+  "description": "CRM for Point Jewels using Sanity CMS",
+  "main": "index.js",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "start": "sanity start",
+    "test": "jest",
+    "lint": "eslint . --ext .ts,.tsx"
+  },
+  "dependencies": {
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "styled-components": "^6.1.19",
+    "jsonwebtoken": "^9.0.2",
+    "dotenv": "^16.3.1",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.1.5"
+  },
+  "devDependencies": {
+    "@sanity/types": "^3.0.0",
+    "@types/jest": "^29.5.12",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@typescript-eslint/eslint-plugin": "^8.48.1",
+    "@typescript-eslint/parser": "^8.48.1",
+    "eslint": "^9.39.1",
+    "jest": "^29.7.0",
+    "sanity": "^3.0.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "sanity",
+    "cms",
+    "crm",
+    "jewelry"
+  ],
+  "author": "",
+  "license": "ISC",
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  }
+}
