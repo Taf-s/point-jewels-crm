@@ -2,103 +2,273 @@ import { defineField, defineType } from 'sanity'
 
 /**
  * CUSTOMER SCHEMA
- * General customer document for the CRM.
- * Tracks contact info, purchase history, and preferences.
+ * Enhanced with comprehensive segmentation and sales intelligence data
+ * Supports data-driven sales decisions with behavioral analytics
  */
 export default defineType({
+  // ... rest of the schema remains the same
   name: 'customer',
   title: 'Customer',
   type: 'document',
   fields: [
-    // Customer name
+    // Basic Information
     defineField({
-      name: 'name',
-      title: 'Full Name',
+      name: 'firstName',
+      title: 'First Name',
       type: 'string',
       validation: (rule) => rule.required(),
-      description: 'Customer\'s full name',
     }),
-
-    // Contact email
+    defineField({
+      name: 'lastName',
+      title: 'Last Name',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
     defineField({
       name: 'email',
       title: 'Email',
       type: 'string',
       validation: (rule) => rule.required().email(),
-      description: 'Primary contact email',
     }),
-
-    // Phone number
     defineField({
       name: 'phone',
-      title: 'Phone Number',
+      title: 'Phone',
       type: 'string',
-      description: 'Contact phone number',
+      description: 'Primary contact number',
     }),
 
-    // Address (simple text for now)
+    // Customer Segmentation & Analytics
     defineField({
-      name: 'address',
-      title: 'Address',
-      type: 'text',
-      description: 'Customer\'s address',
-    }),
-
-    // Customer type (to differentiate from LIZA)
-    defineField({
-      name: 'customerType',
-      title: 'Customer Type',
+      name: 'customerSegment',
+      title: 'Customer Segment',
       type: 'string',
       options: {
         list: [
-          { title: 'Regular', value: 'regular' },
-          { title: 'VIP', value: 'vip' },
-          { title: 'LIZA', value: 'liza' }, // Note: LIZA customers use separate schema
+          { title: 'High Net Worth', value: 'high-net-worth' },
+          { title: 'Mid-Tier', value: 'mid-tier' },
+          { title: 'Entry Level', value: 'entry-level' },
+          { title: 'Gift Buyer', value: 'gift-buyer' },
+          { title: 'Collector', value: 'collector' },
+          { title: 'Investor', value: 'investor' },
         ],
       },
-      initialValue: 'regular',
-      description: 'Type of customer for segmentation',
+      validation: (rule) => rule.required(),
+      description: 'Customer category for targeted sales strategies',
     }),
 
-    // Purchase history (references to products or orders - placeholder)
     defineField({
-      name: 'purchaseHistory',
-      title: 'Purchase History',
+      name: 'lifetimeValue',
+      title: 'Lifetime Value',
+      type: 'number',
+      description: 'Total value of all purchases (auto-calculated from orders)',
+      readOnly: true,
+    }),
+
+    defineField({
+      name: 'purchaseFrequency',
+      title: 'Purchase Frequency',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Frequent (Monthly+)', value: 'frequent' },
+          { title: 'Regular (Quarterly)', value: 'regular' },
+          { title: 'Occasional (Annually)', value: 'occasional' },
+          { title: 'One-time', value: 'one-time' },
+        ],
+      },
+      description: 'How often this customer makes purchases',
+    }),
+
+    // Preferences & Behavior
+    defineField({
+      name: 'preferredCategories',
+      title: 'Preferred Product Categories',
       type: 'array',
-      of: [{ type: 'string' }], // Simple array of product names for now
-      description: 'List of past purchases',
+      of: [{ type: 'string' }],
+      options: {
+        list: [
+          { title: 'Engagement Rings', value: 'engagement-rings' },
+          { title: 'Wedding Bands', value: 'wedding-bands' },
+          { title: 'Necklaces', value: 'necklaces' },
+          { title: 'Earrings', value: 'earrings' },
+          { title: 'Bracelets', value: 'bracelets' },
+          { title: 'Watches', value: 'watches' },
+          { title: 'Custom Pieces', value: 'custom' },
+          { title: 'Investment Pieces', value: 'investment' },
+        ],
+      },
+      description: 'Product categories this customer prefers',
     }),
 
-    // Notes
     defineField({
-      name: 'notes',
-      title: 'Notes',
+      name: 'priceSensitivity',
+      title: 'Price Sensitivity',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Price Insensitive', value: 'insensitive' },
+          { title: 'Value Conscious', value: 'value-conscious' },
+          { title: 'Budget Focused', value: 'budget-focused' },
+        ],
+      },
+      description: 'How price influences purchasing decisions',
+    }),
+
+    defineField({
+      name: 'decisionDrivers',
+      title: 'Key Decision Drivers',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        list: [
+          { title: 'Quality & Craftsmanship', value: 'quality' },
+          { title: 'Brand Reputation', value: 'brand' },
+          { title: 'Investment Value', value: 'investment' },
+          { title: 'Design & Aesthetics', value: 'design' },
+          { title: 'Personal Significance', value: 'personal' },
+          { title: 'Gift Purpose', value: 'gift' },
+          { title: 'Resale Value', value: 'resale' },
+        ],
+      },
+      description: 'Factors that influence this customer\'s buying decisions',
+    }),
+
+    // Sales Intelligence
+    defineField({
+      name: 'referralSource',
+      title: 'Referral Source',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Word of Mouth', value: 'word-of-mouth' },
+          { title: 'Social Media', value: 'social-media' },
+          { title: 'Online Search', value: 'search' },
+          { title: 'Advertisement', value: 'advertisement' },
+          { title: 'Event/Show', value: 'event' },
+          { title: 'Existing Customer', value: 'existing-customer' },
+          { title: 'Direct Contact', value: 'direct' },
+        ],
+      },
+      description: 'How this customer found Point Jewels',
+    }),
+
+    defineField({
+      name: 'communicationPreferences',
+      title: 'Communication Preferences',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'emailMarketing',
+          title: 'Email Marketing',
+          type: 'boolean',
+          initialValue: true,
+        }),
+        defineField({
+          name: 'smsUpdates',
+          title: 'SMS Updates',
+          type: 'boolean',
+          initialValue: false,
+        }),
+        defineField({
+          name: 'personalizedOffers',
+          title: 'Personalized Offers',
+          type: 'boolean',
+          initialValue: true,
+        }),
+      ],
+    }),
+
+    // Relationship Management
+    defineField({
+      name: 'relationshipManager',
+      title: 'Relationship Manager',
+      type: 'reference',
+      to: [{ type: 'staff' }],
+      description: 'Staff member assigned to manage this customer relationship',
+    }),
+
+    defineField({
+      name: 'lastContact',
+      title: 'Last Contact Date',
+      type: 'datetime',
+      description: 'Date of last interaction with this customer',
+    }),
+
+    defineField({
+      name: 'nextFollowUp',
+      title: 'Next Follow-up Date',
+      type: 'datetime',
+      description: 'Scheduled date for next customer engagement',
+    }),
+
+    // Notes & History
+    defineField({
+      name: 'salesNotes',
+      title: 'Sales Notes',
       type: 'text',
-      description: 'Additional notes about the customer',
+      description: 'Internal notes for sales team about this customer',
     }),
 
-    // Associated collections
+    // Encrypted sensitive data
     defineField({
-      name: 'associatedCollections',
-      title: 'Associated Collections',
-      type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'collection' }] }],
-      description: 'Collections this customer is interested in',
+      name: 'encryptedData',
+      title: 'Encrypted Customer Data',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'creditCardToken',
+          title: 'Credit Card Token',
+          type: 'string',
+          description: 'Encrypted token for stored payment method',
+        }),
+        defineField({
+          name: 'personalId',
+          title: 'Personal ID',
+          type: 'string',
+          description: 'Encrypted government ID or passport number',
+        }),
+      ],
+      hidden: true, // Only accessible via API with proper auth
+    }),
+
+    // Auto-generated fields
+    defineField({
+      name: 'customerId',
+      title: 'Customer ID',
+      type: 'string',
+      readOnly: true,
+      description: 'Auto-generated unique identifier',
+    }),
+
+    defineField({
+      name: 'createdAt',
+      title: 'Created At',
+      type: 'datetime',
+      readOnly: true,
+      initialValue: () => new Date().toISOString(),
+    }),
+
+    defineField({
+      name: 'updatedAt',
+      title: 'Updated At',
+      type: 'datetime',
+      readOnly: true,
     }),
   ],
 
-  // Preview for list view
+  // Enhanced preview with segmentation info
   preview: {
     select: {
-      title: 'name',
-      subtitle: 'email',
-      type: 'customerType',
+      firstName: 'firstName',
+      lastName: 'lastName',
+      segment: 'customerSegment',
+      lifetimeValue: 'lifetimeValue',
     },
     prepare(selection) {
-      const { title, subtitle, type } = selection
+      const { firstName, lastName, segment, lifetimeValue } = selection
       return {
-        title: title,
-        subtitle: `${subtitle} (${type})`,
+        title: `${firstName} ${lastName}`,
+        subtitle: `${segment || 'Unsegmented'} • $${lifetimeValue || 0} LTV`,
       }
     },
   },
