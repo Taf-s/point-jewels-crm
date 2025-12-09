@@ -47,15 +47,16 @@ const deskStructure = (S: any) =>
         .title('Audit Logs')
         .child(S.documentTypeList('auditLog')),
     ])
-
 export default defineConfig({
   name: 'default',
   title: 'Point Jewels CRM',
 
-  projectId: 'nzwofsfy',
-  dataset: 'production',
+  projectId: process.env.SANITY_PROJECT_ID || 'nzwofsfy',
+  dataset: process.env.SANITY_DATASET || 'production',
 
   plugins: [deskTool({ structure: deskStructure })],
+
+  // ... rest of the config
 
   schema: {
     types: [collection, lizaCustomer, customer, product, salesOrder, marketingCampaign, staff, analyticsDashboard, auditLog],
