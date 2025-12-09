@@ -52,7 +52,7 @@ export default defineConfig({
   name: 'default',
   title: 'Point Jewels CRM',
 
-  projectId: 'ivgk830x', // Replace with your Sanity project ID
+  projectId: 'nzwofsfy', // Replace with your Sanity project ID
   dataset: 'production',
 
   plugins: [deskTool({ structure: deskStructure })],
