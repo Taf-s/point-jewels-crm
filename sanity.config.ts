@@ -57,6 +57,7 @@ export default defineConfig({
   plugins: [deskTool({ structure: deskStructure })],
 
   // ... rest of the config
+  
 
   schema: {
     types: [collection, lizaCustomer, customer, product, salesOrder, marketingCampaign, staff, analyticsDashboard, auditLog],
