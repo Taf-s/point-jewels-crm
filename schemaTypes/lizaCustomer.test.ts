@@ -1,3 +1,4 @@
+// /Users/tafarasithole/Desktop/point-jewels-crm/schemaTypes/lizaCustomer.test.ts
 import lizaCustomer from './lizaCustomer'
 
 describe('LIZA Customer Schema', () => {
@@ -13,21 +14,22 @@ describe('LIZA Customer Schema', () => {
     expect(Array.isArray(fields)).toBe(true)
     expect(fields.length).toBeGreaterThan(0)
 
-    const nameField = fields.find((field: any) => field.name === 'name')
-    expect(nameField).toBeDefined()
-    expect(nameField?.validation).toBeDefined()
+    // Check for firstName and lastName instead of name
+    const firstNameField = fields.find((field: any) => field.name === 'firstName')
+    expect(firstNameField).toBeDefined()
+    expect(firstNameField?.validation).toBeDefined()
 
     const emailField = fields.find((field: any) => field.name === 'email')
     expect(emailField).toBeDefined()
     expect(emailField?.validation).toBeDefined()
   })
 
-  it('should have VIP status field', () => {
+  it('should have LIZA tier field', () => {
     const fields = lizaCustomer.fields
-    const vipField = fields.find((field: any) => field.name === 'isVIP')
-    expect(vipField).toBeDefined()
-    expect(vipField?.type).toBe('boolean')
-    expect(vipField?.initialValue).toBe(true)
+    const tierField = fields.find((field: any) => field.name === 'lizaTier')
+    expect(tierField).toBeDefined()
+    expect(tierField?.type).toBe('string')
+    expect(tierField?.validation).toBeDefined()
   })
 
   it('should have a preview configuration', () => {
@@ -40,8 +42,17 @@ describe('LIZA Customer Schema', () => {
     const fields = lizaCustomer.fields
     const fieldTypes = fields.map((field: any) => field.type)
     expect(fieldTypes).toContain('string')
-    expect(fieldTypes).toContain('boolean')
-    expect(fieldTypes).toContain('array')
-    expect(fieldTypes).toContain('text')
+    expect(fieldTypes).toContain('number')
+    expect(fieldTypes).toContain('object')
+    expect(fieldTypes.some((type: string) => type === 'array' || type === 'reference')).toBe(true)
+  })
+
+  it('should have advanced cultural profiling field', () => {
+    const fields = lizaCustomer.fields
+    const culturalField = fields.find((field: any) => field.name === 'culturalProfile')
+    expect(culturalField).toBeDefined()
+    expect(culturalField?.type).toBe('object')
+    expect(culturalField?.fields).toBeDefined()
+    expect(culturalField?.description).toContain('anthropological')
   })
 })

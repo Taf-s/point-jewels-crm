@@ -1,12 +1,13 @@
+// /Users/tafarasithole/Desktop/point-jewels-crm/schemaTypes/customer.ts
 import { defineField, defineType } from 'sanity'
 
 /**
  * CUSTOMER SCHEMA
  * Enhanced with comprehensive segmentation and sales intelligence data
  * Supports data-driven sales decisions with behavioral analytics
+ * Phase 1: Added Cultural Profiling for anthropological insights
  */
 export default defineType({
-  // ... rest of the schema remains the same
   name: 'customer',
   title: 'Customer',
   type: 'document',
@@ -201,7 +202,7 @@ export default defineType({
       description: 'Scheduled date for next customer engagement',
     }),
 
-    // Notes & History
+    // Sales Notes
     defineField({
       name: 'salesNotes',
       title: 'Sales Notes',
@@ -228,7 +229,106 @@ export default defineType({
           description: 'Encrypted government ID or passport number',
         }),
       ],
-      hidden: true, // Only accessible via API with proper auth
+      hidden: true,
+    }),
+
+    // Cultural Profiling (Phase 1: Anthropologist + Engineer)
+    defineField({
+      name: 'culturalProfile',
+      title: 'Cultural Profile',
+      type: 'object',
+      description: 'Anthropological insights for culturally resonant sales with engineering precision',
+      fields: [
+        defineField({
+          name: 'culturalHeritage',
+          title: 'Cultural Heritage',
+          type: 'array',
+          of: [{ type: 'string' }],
+          options: {
+            list: [
+              { title: 'African', value: 'african' },
+              { title: 'European', value: 'european' },
+              { title: 'Asian', value: 'asian' },
+              { title: 'North American', value: 'north-american' },
+              { title: 'South American', value: 'south-american' },
+              { title: 'Middle Eastern', value: 'middle-eastern' },
+              { title: 'Oceanic', value: 'oceanic' },
+              { title: 'Mixed Heritage', value: 'mixed' },
+            ],
+          },
+          description: 'Primary cultural backgrounds for authentic engagement',
+        }),
+        defineField({
+          name: 'primaryLanguage',
+          title: 'Primary Language',
+          type: 'string',
+          description: 'Native or preferred language for communication',
+        }),
+        defineField({
+          name: 'culturalValues',
+          title: 'Cultural Values',
+          type: 'array',
+          of: [{ type: 'string' }],
+          options: {
+            list: [
+              { title: 'Family & Tradition', value: 'family-tradition' },
+              { title: 'Harmony & Balance', value: 'harmony-balance' },
+              { title: 'Innovation & Progress', value: 'innovation-progress' },
+              { title: 'Spirituality & Meaning', value: 'spirituality-meaning' },
+              { title: 'Community & Relationships', value: 'community-relationships' },
+              { title: 'Excellence & Quality', value: 'excellence-quality' },
+            ],
+          },
+          description: 'Core values that guide decision-making and preferences',
+        }),
+        defineField({
+          name: 'communicationStyle',
+          title: 'Communication Style',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'Direct & Straightforward', value: 'direct' },
+              { title: 'Indirect & Nuanced', value: 'indirect' },
+              { title: 'Formal & Respectful', value: 'formal' },
+              { title: 'Casual & Warm', value: 'casual' },
+            ],
+          },
+          description: 'Preferred communication approach for positive alignment',
+        }),
+        defineField({
+          name: 'decisionMakingApproach',
+          title: 'Decision Making Approach',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'Individual', value: 'individual' },
+              { title: 'Family Consensus', value: 'family-consensus' },
+              { title: 'Community Input', value: 'community-input' },
+              { title: 'Expert Guidance', value: 'expert-guidance' },
+            ],
+          },
+          description: 'How decisions are typically made in their cultural context',
+        }),
+        defineField({
+          name: 'jewelryCulturalSignificance',
+          title: 'Jewelry Cultural Significance',
+          type: 'text',
+          description: 'How jewelry holds meaning in their cultural traditions and practices',
+        }),
+        defineField({
+          name: 'positiveEnergyAlignment',
+          title: 'Positive Energy Alignment',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'High - Naturally Harmonious', value: 'high' },
+              { title: 'Medium - Balanced Approach', value: 'medium' },
+              { title: 'Low - Pragmatic Focus', value: 'low' },
+            ],
+          },
+          description: 'Alignment with positive, Reiki-inspired energy for authentic connections',
+        }),
+      ],
     }),
 
     // Auto-generated fields
@@ -256,7 +356,6 @@ export default defineType({
     }),
   ],
 
-  // Enhanced preview with segmentation info
   preview: {
     select: {
       firstName: 'firstName',

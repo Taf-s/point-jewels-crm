@@ -1,12 +1,13 @@
+// /Users/tafarasithole/Desktop/point-jewels-crm/schemaTypes/lizaCustomer.ts
 import { defineField, defineType } from 'sanity'
 
 /**
  * LIZA CUSTOMER SCHEMA
  * High-net-worth customer profile with advanced analytics and priority handling
  * Enhanced for data-driven luxury sales decisions
+ * Phase 1: Added Advanced Cultural Profiling for elite customer resonance
  */
 export default defineType({
-  // ... rest of the schema remains the same
   name: 'lizaCustomer',
   title: 'LIZA Customer',
   type: 'document',
@@ -176,6 +177,128 @@ export default defineType({
       ],
     }),
 
+    // Advanced Cultural Profiling (Phase 1: Enhanced for LIZA VIPs)
+    defineField({
+      name: 'culturalProfile',
+      title: 'Cultural Profile',
+      type: 'object',
+      description: 'Deep anthropological insights with engineering precision for elite customer resonance',
+      fields: [
+        defineField({
+          name: 'culturalHeritage',
+          title: 'Cultural Heritage',
+          type: 'array',
+          of: [{ type: 'string' }],
+          options: {
+            list: [
+              { title: 'African', value: 'african' },
+              { title: 'European', value: 'european' },
+              { title: 'Asian', value: 'asian' },
+              { title: 'North American', value: 'north-american' },
+              { title: 'South American', value: 'south-american' },
+              { title: 'Middle Eastern', value: 'middle-eastern' },
+              { title: 'Oceanic', value: 'oceanic' },
+              { title: 'Mixed Heritage', value: 'mixed' },
+              { title: 'Global Cosmopolitan', value: 'cosmopolitan' },
+            ],
+          },
+          description: 'Primary cultural backgrounds for bespoke, culturally resonant experiences',
+        }),
+        defineField({
+          name: 'primaryLanguage',
+          title: 'Primary Language',
+          type: 'string',
+          description: 'Native or preferred language for elite communication',
+        }),
+        defineField({
+          name: 'culturalValues',
+          title: 'Cultural Values',
+          type: 'array',
+          of: [{ type: 'string' }],
+          options: {
+            list: [
+              { title: 'Family Legacy & Tradition', value: 'family-legacy' },
+              { title: 'Harmony & Spiritual Balance', value: 'harmony-spiritual' },
+              { title: 'Innovation & Cultural Fusion', value: 'innovation-fusion' },
+              { title: 'Excellence & Mastery', value: 'excellence-mastery' },
+              { title: 'Philanthropy & Social Impact', value: 'philanthropy-impact' },
+              { title: 'Artistic Expression', value: 'artistic-expression' },
+            ],
+          },
+          description: 'Sophisticated values guiding luxury decision-making',
+        }),
+        defineField({
+          name: 'communicationStyle',
+          title: 'Communication Style',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'Direct & Visionary', value: 'direct-visionary' },
+              { title: 'Indirect & Diplomatic', value: 'indirect-diplomatic' },
+              { title: 'Formal & Elite', value: 'formal-elite' },
+              { title: 'Casual & Cultured', value: 'casual-cultured' },
+            ],
+          },
+          description: 'Refined communication preferences for positive, aligned engagement',
+        }),
+        defineField({
+          name: 'decisionMakingApproach',
+          title: 'Decision Making Approach',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'Individual Visionary', value: 'individual-visionary' },
+              { title: 'Family Dynasty Consensus', value: 'family-dynasty' },
+              { title: 'Trusted Advisor Network', value: 'advisor-network' },
+              { title: 'Intuitive & Experiential', value: 'intuitive-experiential' },
+            ],
+          },
+          description: 'Elite decision-making processes in cultural context',
+        }),
+        defineField({
+          name: 'jewelryCulturalSignificance',
+          title: 'Jewelry Cultural Significance',
+          type: 'text',
+          description: 'Deep cultural meaning and legacy value of jewelry in their heritage',
+        }),
+        defineField({
+          name: 'culturalInvestmentPhilosophy',
+          title: 'Cultural Investment Philosophy',
+          type: 'text',
+          description: 'How cultural values influence investment and collection strategies',
+        }),
+        defineField({
+          name: 'positiveEnergyAlignment',
+          title: 'Positive Energy Alignment',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'Exceptional - Reiki-Harmonized', value: 'exceptional' },
+              { title: 'High - Naturally Aligned', value: 'high' },
+              { title: 'Medium - Evolving Harmony', value: 'medium' },
+            ],
+          },
+          description: 'Advanced positive energy alignment for transformative customer experiences',
+        }),
+        defineField({
+          name: 'preferredCulturalExperiences',
+          title: 'Preferred Cultural Experiences',
+          type: 'array',
+          of: [{ type: 'string' }],
+          options: {
+            list: [
+              { title: 'Cultural Heritage Tours', value: 'heritage-tours' },
+              { title: 'Artisan Collaborations', value: 'artisan-collaborations' },
+              { title: 'Cultural Fusion Events', value: 'fusion-events' },
+              { title: 'Philanthropic Initiatives', value: 'philanthropic' },
+              { title: 'Spiritual Retreats', value: 'spiritual-retreats' },
+            ],
+          },
+          description: 'Elite cultural experiences to enhance jewelry engagement',
+        }),
+      ],
+    }),
+
     // Relationship & Service
     defineField({
       name: 'dedicatedAdvisor',
@@ -261,7 +384,6 @@ export default defineType({
     }),
   ],
 
-  // VIP preview
   preview: {
     select: {
       firstName: 'firstName',

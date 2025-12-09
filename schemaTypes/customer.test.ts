@@ -1,3 +1,4 @@
+// /Users/tafarasithole/Desktop/point-jewels-crm/schemaTypes/customer.test.ts
 import customer from './customer'
 
 describe('Customer Schema', () => {
@@ -13,21 +14,22 @@ describe('Customer Schema', () => {
     expect(Array.isArray(fields)).toBe(true)
     expect(fields.length).toBeGreaterThan(0)
 
-    const nameField = fields.find((field: any) => field.name === 'name')
-    expect(nameField).toBeDefined()
-    expect(nameField?.validation).toBeDefined()
+    // Check for firstName and lastName instead of name
+    const firstNameField = fields.find((field: any) => field.name === 'firstName')
+    expect(firstNameField).toBeDefined()
+    expect(firstNameField?.validation).toBeDefined()
 
     const emailField = fields.find((field: any) => field.name === 'email')
     expect(emailField).toBeDefined()
     expect(emailField?.validation).toBeDefined()
   })
 
-  it('should have customer type field', () => {
+  it('should have customer segment field', () => {
     const fields = customer.fields
-    const typeField = fields.find((field: any) => field.name === 'customerType')
-    expect(typeField).toBeDefined()
-    expect(typeField?.type).toBe('string')
-    expect(typeField?.initialValue).toBe('regular')
+    const segmentField = fields.find((field: any) => field.name === 'customerSegment')
+    expect(segmentField).toBeDefined()
+    expect(segmentField?.type).toBe('string')
+    expect(segmentField?.validation).toBeDefined()
   })
 
   it('should have a preview configuration', () => {
@@ -42,5 +44,15 @@ describe('Customer Schema', () => {
     expect(fieldTypes).toContain('string')
     expect(fieldTypes).toContain('text')
     expect(fieldTypes).toContain('array')
+    expect(fieldTypes).toContain('object')
+    expect(fieldTypes).toContain('reference')
+  })
+
+  it('should have cultural profiling field', () => {
+    const fields = customer.fields
+    const culturalField = fields.find((field: any) => field.name === 'culturalProfile')
+    expect(culturalField).toBeDefined()
+    expect(culturalField?.type).toBe('object')
+    expect(culturalField?.fields).toBeDefined()
   })
 })
