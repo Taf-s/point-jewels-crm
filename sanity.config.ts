@@ -52,7 +52,7 @@ export default defineConfig({
   name: 'default',
   title: 'Point Jewels CRM',
 
-  projectId: 'nzwofsfy', // Replace with your Sanity project ID
+  projectId: 'nzwofsfy',
   dataset: 'production',
 
   plugins: [deskTool({ structure: deskStructure })],
@@ -72,33 +72,4 @@ export default defineConfig({
     ],
     redirectOnSingle: false,
   },
-
-  // CORS for integrations
-  cors: {
-    origin: ['http://localhost:3333', 'https://your-domain.com'], // Add your domains
-    credentials: true,
-  },
-
-  // Webhooks for email integrations
-  webhooks: [
-    {
-      name: 'order-notification',
-      url: 'https://your-email-service.com/webhook', // Replace with actual webhook URL
-      httpMethod: 'POST',
-      apiVersion: 'v2021-03-25',
-      filters: {
-        types: ['salesOrder'],
-        operations: ['create', 'update'],
-      },
-      projection: `{
-        _type,
-        _id,
-        orderNumber,
-        customer->{name, email},
-        totalAmount,
-        status
-      }`,
-      secret: 'your-webhook-secret', // Secure secret
-    },
-  ],
 })
