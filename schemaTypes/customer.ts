@@ -1,345 +1,204 @@
-// /Users/tafarasithole/Desktop/point-jewels-crm/schemaTypes/customer.ts
+// /Users/tafarasithole/Desktop/point-jewels-crm/schemaTypes/trendAnalysis.ts
 import { defineField, defineType } from 'sanity'
 
 /**
- * CUSTOMER SCHEMA
- * Enhanced with comprehensive segmentation and sales intelligence data
- * Supports data-driven sales decisions with behavioral analytics
- * Phase 1: Added Cultural Profiling for anthropological insights
+ * TREND ANALYSIS SCHEMA
+ * Phase 3: Trend metrics, patterns, and insights
+ * Tracks seasonal trends, cultural patterns, engagement effectiveness
  */
 export default defineType({
-  name: 'customer',
-  title: 'Customer',
+  name: 'trendAnalysis',
+  title: 'Trend Analysis',
   type: 'document',
   fields: [
-    // Basic Information
+    // Trend Type
     defineField({
-      name: 'firstName',
-      title: 'First Name',
-      type: 'string',
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'lastName',
-      title: 'Last Name',
-      type: 'string',
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'email',
-      title: 'Email',
-      type: 'string',
-      validation: (rule) => rule.required().email(),
-    }),
-    defineField({
-      name: 'phone',
-      title: 'Phone',
-      type: 'string',
-      description: 'Primary contact number',
-    }),
-
-    // Customer Segmentation & Analytics
-    defineField({
-      name: 'customerSegment',
-      title: 'Customer Segment',
+      name: 'trendType',
+      title: 'Trend Type',
       type: 'string',
       options: {
         list: [
-          { title: 'High Net Worth', value: 'high-net-worth' },
-          { title: 'Mid-Tier', value: 'mid-tier' },
-          { title: 'Entry Level', value: 'entry-level' },
-          { title: 'Gift Buyer', value: 'gift-buyer' },
-          { title: 'Collector', value: 'collector' },
-          { title: 'Investor', value: 'investor' },
+          { title: 'Seasonal Pattern', value: 'seasonal' },
+          { title: 'Cultural Preference', value: 'cultural' },
+          { title: 'Musical-Jewelry Correlation', value: 'musical-jewelry' },
+          { title: 'Engagement Effectiveness', value: 'engagement' },
+          { title: 'Collection Performance', value: 'collection' },
+          { title: 'Experience Adoption', value: 'experience' },
+          { title: 'Energy Alignment Impact', value: 'energy-alignment' },
         ],
       },
       validation: (rule) => rule.required(),
-      description: 'Customer category for targeted sales strategies',
+      description: 'Type of trend being analyzed',
     }),
 
+    // Time Frame
     defineField({
-      name: 'lifetimeValue',
-      title: 'Lifetime Value',
-      type: 'number',
-      description: 'Total value of all purchases (auto-calculated from orders)',
-      readOnly: true,
-    }),
-
-    defineField({
-      name: 'purchaseFrequency',
-      title: 'Purchase Frequency',
+      name: 'timeFrame',
+      title: 'Time Frame',
       type: 'string',
       options: {
         list: [
-          { title: 'Frequent (Monthly+)', value: 'frequent' },
-          { title: 'Regular (Quarterly)', value: 'regular' },
-          { title: 'Occasional (Annually)', value: 'occasional' },
-          { title: 'One-time', value: 'one-time' },
+          { title: 'Daily', value: 'daily' },
+          { title: 'Weekly', value: 'weekly' },
+          { title: 'Monthly', value: 'monthly' },
+          { title: 'Quarterly', value: 'quarterly' },
+          { title: 'Yearly', value: 'yearly' },
+          { title: 'Multi-Year', value: 'multi-year' },
         ],
       },
-      description: 'How often this customer makes purchases',
+      description: 'Granularity of trend analysis',
     }),
 
-    // Preferences & Behavior
+    // Period
     defineField({
-      name: 'preferredCategories',
-      title: 'Preferred Product Categories',
-      type: 'array',
-      of: [{ type: 'string' }],
-      options: {
-        list: [
-          { title: 'Engagement Rings', value: 'engagement-rings' },
-          { title: 'Wedding Bands', value: 'wedding-bands' },
-          { title: 'Necklaces', value: 'necklaces' },
-          { title: 'Earrings', value: 'earrings' },
-          { title: 'Bracelets', value: 'bracelets' },
-          { title: 'Watches', value: 'watches' },
-          { title: 'Custom Pieces', value: 'custom' },
-          { title: 'Investment Pieces', value: 'investment' },
-        ],
-      },
-      description: 'Product categories this customer prefers',
-    }),
-
-    defineField({
-      name: 'priceSensitivity',
-      title: 'Price Sensitivity',
+      name: 'period',
+      title: 'Analysis Period',
       type: 'string',
-      options: {
-        list: [
-          { title: 'Price Insensitive', value: 'insensitive' },
-          { title: 'Value Conscious', value: 'value-conscious' },
-          { title: 'Budget Focused', value: 'budget-focused' },
-        ],
-      },
-      description: 'How price influences purchasing decisions',
+      description: 'Specific period analyzed (e.g., Q4 2025, Holiday Season)',
     }),
 
+    // Data Points
     defineField({
-      name: 'decisionDrivers',
-      title: 'Key Decision Drivers',
-      type: 'array',
-      of: [{ type: 'string' }],
-      options: {
-        list: [
-          { title: 'Quality & Craftsmanship', value: 'quality' },
-          { title: 'Brand Reputation', value: 'brand' },
-          { title: 'Investment Value', value: 'investment' },
-          { title: 'Design & Aesthetics', value: 'design' },
-          { title: 'Personal Significance', value: 'personal' },
-          { title: 'Gift Purpose', value: 'gift' },
-          { title: 'Resale Value', value: 'resale' },
-        ],
-      },
-      description: 'Factors that influence this customer\'s buying decisions',
-    }),
-
-    // Sales Intelligence
-    defineField({
-      name: 'referralSource',
-      title: 'Referral Source',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'Word of Mouth', value: 'word-of-mouth' },
-          { title: 'Social Media', value: 'social-media' },
-          { title: 'Online Search', value: 'search' },
-          { title: 'Advertisement', value: 'advertisement' },
-          { title: 'Event/Show', value: 'event' },
-          { title: 'Existing Customer', value: 'existing-customer' },
-          { title: 'Direct Contact', value: 'direct' },
-        ],
-      },
-      description: 'How this customer found Point Jewels',
-    }),
-
-    defineField({
-      name: 'communicationPreferences',
-      title: 'Communication Preferences',
+      name: 'dataPoints',
+      title: 'Data Points',
       type: 'object',
       fields: [
         defineField({
-          name: 'emailMarketing',
-          title: 'Email Marketing',
-          type: 'boolean',
-          initialValue: true,
+          name: 'totalMetric',
+          title: 'Total Metric',
+          type: 'number',
+          description: 'Aggregate metric value',
         }),
         defineField({
-          name: 'smsUpdates',
-          title: 'SMS Updates',
-          type: 'boolean',
-          initialValue: false,
+          name: 'averageMetric',
+          title: 'Average Metric',
+          type: 'number',
+          description: 'Average value',
         }),
         defineField({
-          name: 'personalizedOffers',
-          title: 'Personalized Offers',
-          type: 'boolean',
-          initialValue: true,
+          name: 'percentageChange',
+          title: 'Percentage Change',
+          type: 'number',
+          description: 'Change from previous period (%)',
+        }),
+        defineField({
+          name: 'topCategory',
+          title: 'Top Category',
+          type: 'string',
+          description: 'Leading category or segment',
+        }),
+        defineField({
+          name: 'bottomCategory',
+          title: 'Bottom Category',
+          type: 'string',
+          description: 'Lowest performing category',
+        }),
+        defineField({
+          name: 'recordsAnalyzed',
+          title: 'Records Analyzed',
+          type: 'number',
+          description: 'Number of records in analysis',
         }),
       ],
+      description: 'Aggregated metric data',
     }),
 
-    // Relationship Management
+    // Insights
     defineField({
-      name: 'relationshipManager',
-      title: 'Relationship Manager',
-      type: 'reference',
-      to: [{ type: 'staff' }],
-      description: 'Staff member assigned to manage this customer relationship',
-    }),
-
-    defineField({
-      name: 'lastContact',
-      title: 'Last Contact Date',
-      type: 'datetime',
-      description: 'Date of last interaction with this customer',
-    }),
-
-    defineField({
-      name: 'nextFollowUp',
-      title: 'Next Follow-up Date',
-      type: 'datetime',
-      description: 'Scheduled date for next customer engagement',
-    }),
-
-    // Sales Notes
-    defineField({
-      name: 'salesNotes',
-      title: 'Sales Notes',
-      type: 'text',
-      description: 'Internal notes for sales team about this customer',
-    }),
-
-    // Encrypted sensitive data
-    defineField({
-      name: 'encryptedData',
-      title: 'Encrypted Customer Data',
+      name: 'insights',
+      title: 'Insights',
       type: 'object',
       fields: [
         defineField({
-          name: 'creditCardToken',
-          title: 'Credit Card Token',
-          type: 'string',
-          description: 'Encrypted token for stored payment method',
-        }),
-        defineField({
-          name: 'personalId',
-          title: 'Personal ID',
-          type: 'string',
-          description: 'Encrypted government ID or passport number',
-        }),
-      ],
-      hidden: true,
-    }),
-
-    // Cultural Profiling (Phase 1: Anthropologist + Engineer)
-    defineField({
-      name: 'culturalProfile',
-      title: 'Cultural Profile',
-      type: 'object',
-      description: 'Anthropological insights for culturally resonant sales with engineering precision',
-      fields: [
-        defineField({
-          name: 'culturalHeritage',
-          title: 'Cultural Heritage',
-          type: 'array',
-          of: [{ type: 'string' }],
-          options: {
-            list: [
-              { title: 'African', value: 'african' },
-              { title: 'European', value: 'european' },
-              { title: 'Asian', value: 'asian' },
-              { title: 'North American', value: 'north-american' },
-              { title: 'South American', value: 'south-american' },
-              { title: 'Middle Eastern', value: 'middle-eastern' },
-              { title: 'Oceanic', value: 'oceanic' },
-              { title: 'Mixed Heritage', value: 'mixed' },
-            ],
-          },
-          description: 'Primary cultural backgrounds for authentic engagement',
-        }),
-        defineField({
-          name: 'primaryLanguage',
-          title: 'Primary Language',
-          type: 'string',
-          description: 'Native or preferred language for communication',
-        }),
-        defineField({
-          name: 'culturalValues',
-          title: 'Cultural Values',
-          type: 'array',
-          of: [{ type: 'string' }],
-          options: {
-            list: [
-              { title: 'Family & Tradition', value: 'family-tradition' },
-              { title: 'Harmony & Balance', value: 'harmony-balance' },
-              { title: 'Innovation & Progress', value: 'innovation-progress' },
-              { title: 'Spirituality & Meaning', value: 'spirituality-meaning' },
-              { title: 'Community & Relationships', value: 'community-relationships' },
-              { title: 'Excellence & Quality', value: 'excellence-quality' },
-            ],
-          },
-          description: 'Core values that guide decision-making and preferences',
-        }),
-        defineField({
-          name: 'communicationStyle',
-          title: 'Communication Style',
-          type: 'string',
-          options: {
-            list: [
-              { title: 'Direct & Straightforward', value: 'direct' },
-              { title: 'Indirect & Nuanced', value: 'indirect' },
-              { title: 'Formal & Respectful', value: 'formal' },
-              { title: 'Casual & Warm', value: 'casual' },
-            ],
-          },
-          description: 'Preferred communication approach for positive alignment',
-        }),
-        defineField({
-          name: 'decisionMakingApproach',
-          title: 'Decision Making Approach',
-          type: 'string',
-          options: {
-            list: [
-              { title: 'Individual', value: 'individual' },
-              { title: 'Family Consensus', value: 'family-consensus' },
-              { title: 'Community Input', value: 'community-input' },
-              { title: 'Expert Guidance', value: 'expert-guidance' },
-            ],
-          },
-          description: 'How decisions are typically made in their cultural context',
-        }),
-        defineField({
-          name: 'jewelryCulturalSignificance',
-          title: 'Jewelry Cultural Significance',
+          name: 'narrativeAnalysis',
+          title: 'Narrative Analysis',
           type: 'text',
-          description: 'How jewelry holds meaning in their cultural traditions and practices',
+          description: 'Detailed written analysis of trends',
         }),
         defineField({
-          name: 'positiveEnergyAlignment',
-          title: 'Positive Energy Alignment',
+          name: 'keyFindings',
+          title: 'Key Findings',
+          type: 'array',
+          of: [{ type: 'string' }],
+          description: 'Bullet-point key findings',
+        }),
+        defineField({
+          name: 'patterns',
+          title: 'Identified Patterns',
+          type: 'array',
+          of: [{ type: 'string' }],
+          description: 'Notable patterns detected',
+        }),
+        defineField({
+          name: 'anomalies',
+          title: 'Anomalies',
+          type: 'array',
+          of: [{ type: 'string' }],
+          description: 'Unusual or unexpected findings',
+        }),
+      ],
+      description: 'Analysis and insights',
+    }),
+
+    // Recommendations
+    defineField({
+      name: 'recommendations',
+      title: 'Recommendations',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'Actionable recommendations based on trends',
+    }),
+
+    // Impact
+    defineField({
+      name: 'impact',
+      title: 'Business Impact',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'estimatedRevenueImpact',
+          title: 'Estimated Revenue Impact',
+          type: 'number',
+          description: 'Projected revenue impact ($)',
+        }),
+        defineField({
+          name: 'customersAffected',
+          title: 'Customers Affected',
+          type: 'number',
+          description: 'Number of customers impacted',
+        }),
+        defineField({
+          name: 'implementationEffort',
+          title: 'Implementation Effort',
           type: 'string',
           options: {
             list: [
-              { title: 'High - Naturally Harmonious', value: 'high' },
-              { title: 'Medium - Balanced Approach', value: 'medium' },
-              { title: 'Low - Pragmatic Focus', value: 'low' },
+              { title: 'Low', value: 'low' },
+              { title: 'Medium', value: 'medium' },
+              { title: 'High', value: 'high' },
             ],
           },
-          description: 'Alignment with positive, Reiki-inspired energy for authentic connections',
+          description: 'Effort to implement recommendations',
+        }),
+        defineField({
+          name: 'priority',
+          title: 'Priority',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'Critical', value: 'critical' },
+              { title: 'High', value: 'high' },
+              { title: 'Medium', value: 'medium' },
+              { title: 'Low', value: 'low' },
+            ],
+          },
+          description: 'Priority for implementation',
         }),
       ],
+      description: 'Business impact metrics',
     }),
 
     // Auto-generated fields
-    defineField({
-      name: 'customerId',
-      title: 'Customer ID',
-      type: 'string',
-      readOnly: true,
-      description: 'Auto-generated unique identifier',
-    }),
-
     defineField({
       name: 'createdAt',
       title: 'Created At',
@@ -358,17 +217,73 @@ export default defineType({
 
   preview: {
     select: {
-      firstName: 'firstName',
-      lastName: 'lastName',
-      segment: 'customerSegment',
-      lifetimeValue: 'lifetimeValue',
+      trendType: 'trendType',
+      period: 'period',
+      percentageChange: 'dataPoints.percentageChange',
     },
     prepare(selection) {
-      const { firstName, lastName, segment, lifetimeValue } = selection
+      const { trendType, period, percentageChange } = selection
+      const changeLabel = percentageChange > 0 ? `+${percentageChange}%` : `${percentageChange}%`
       return {
-        title: `${firstName} ${lastName}`,
-        subtitle: `${segment || 'Unsegmented'} • $${lifetimeValue || 0} LTV`,
+        title: trendType,
+        subtitle: `${period} • ${changeLabel}`,
       }
     },
   },
+})
+
+// /Users/tafarasithole/Desktop/point-jewels-crm/schemaTypes/trendAnalysis.test.ts
+import trendAnalysis from './trendAnalysis'
+
+describe('Trend Analysis Schema', () => {
+  it('should define a valid Sanity document type', () => {
+    expect(trendAnalysis.name).toBe('trendAnalysis')
+    expect(trendAnalysis.title).toBe('Trend Analysis')
+    expect(trendAnalysis.type).toBe('document')
+  })
+
+  it('should have trend type field', () => {
+    const fields = trendAnalysis.fields
+    const trendTypeField = fields.find((field: any) => field.name === 'trendType')
+    expect(trendTypeField).toBeDefined()
+    expect(trendTypeField?.type).toBe('string')
+    expect(trendTypeField?.validation).toBeDefined()
+  })
+
+  it('should have time frame field', () => {
+    const fields = trendAnalysis.fields
+    const timeFrameField = fields.find((field: any) => field.name === 'timeFrame')
+    expect(timeFrameField).toBeDefined()
+    expect(timeFrameField?.type).toBe('string')
+  })
+
+  it('should have data points object', () => {
+    const fields = trendAnalysis.fields
+    const dataPointsField = fields.find((field: any) => field.name === 'dataPoints')
+    expect(dataPointsField).toBeDefined()
+    expect(dataPointsField?.type).toBe('object')
+    expect(dataPointsField?.fields).toBeDefined()
+  })
+
+  it('should have insights object', () => {
+    const fields = trendAnalysis.fields
+    const insightsField = fields.find((field: any) => field.name === 'insights')
+    expect(insightsField).toBeDefined()
+    expect(insightsField?.type).toBe('object')
+  })
+
+  it('should have recommendations array', () => {
+    const fields = trendAnalysis.fields
+    const recommendationsField = fields.find((field: any) => field.name === 'recommendations')
+    expect(recommendationsField).toBeDefined()
+    expect(recommendationsField?.type).toBe('array')
+  })
+
+  it('should have impact object with business metrics', () => {
+    const fields = trendAnalysis.fields
+    const impactField = fields.find((field: any) => field.name === 'impact')
+    expect(impactField).toBeDefined()
+    expect(impactField?.type).toBe('object')
+    expect(impactField?.fields).toBeDefined()
+  })
 })
